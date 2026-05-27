@@ -210,6 +210,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: spacing.lg,
   },
+  checkboxRowCompact: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacing.sm,
+  },
   fieldLabel: {
     color: colors.textSecondary,
     fontSize: typography.small,
