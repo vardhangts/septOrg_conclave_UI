@@ -39,8 +39,7 @@ function doPost(e) {
   } catch (error) {
     return ContentService
       .createTextOutput(JSON.stringify({ success: false, error: error.message || 'Unknown error' }))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setResponseCode(400);
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 

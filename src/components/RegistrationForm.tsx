@@ -19,8 +19,17 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
   const [agreed, setAgreed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
+  const endpointConfigured = Boolean(googleSheetsConfig.sheetEndpointUrl && !googleSheetsConfig.sheetEndpointUrl.includes('REPLACE_WITH_DEPLOYED_WEB_APP_URL'));
 
   const handleSubmit = async () => {
+    if (!endpointConfigured) {
+      Alert.alert(
+        'Google Sheets endpoint not configured',
+        'Set sheetEndpointUrl in src/config/googleSheets.ts to your deployed Google Apps Script web app URL before submitting.'
+      );
+      return;
+    }
+
     if (!name.trim() || (!email.trim() && !phone.trim())) {
       Alert.alert('Missing information', 'Please provide your name and either a phone number or email to register.');
       return;
@@ -87,6 +96,14 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
         </View>
       ) : null}
 
+      {!endpointConfigured ? (
+        <View style={styles.warningBanner}>
+          <Text style={styles.warningText}>
+            Google Sheets submission is disabled until you add your deployed Apps Script URL in src/config/googleSheets.ts.
+          </Text>
+        </View>
+      ) : null}
+
       <TextInput
         value={name}
         onChangeText={(text: string) => {
@@ -144,7 +161,12 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
         <Text style={[styles.checkboxLabel, compact && styles.checkboxLabelCompact]}>I agree to receive event updates via email.</Text>
       </Pressable>
 
-      <Pressable style={[styles.submitButton, compact && styles.submitButtonCompact]} onPress={handleSubmit} accessibilityLabel="Submit registration" disabled={isSubmitting}>
+      <Pressable
+        style={[styles.submitButton, compact && styles.submitButtonCompact, !endpointConfigured && styles.submitButtonDisabled]}
+        onPress={handleSubmit}
+        accessibilityLabel="Submit registration"
+        disabled={isSubmitting || !endpointConfigured}
+      >
         {isSubmitting ? (
           <ActivityIndicator color={colors.textPrimary} />
         ) : (
@@ -333,6 +355,21 @@ const styles = StyleSheet.create({
   noteCompact: {
     fontSize: 12,
     marginTop: spacing.sm,
+  },
+  warningBanner: {
+    backgroundColor: 'rgba(229, 127, 65, 0.12)',
+    borderColor: colors.primary,
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+  },
+  warningText: {
+    color: colors.primary,
+    fontSize: typography.small,
+  },
+  submitButtonDisabled: {
+    opacity: 0.6,
   },
 });
 
