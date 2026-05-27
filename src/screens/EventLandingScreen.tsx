@@ -110,6 +110,23 @@ const EventLandingScreen = () => {
           </View>
         </View>
 
+        <View nativeID="registration" style={[styles.section, styles.sectionAlt]} onLayout={(event: LayoutChangeEvent) => setRegistrationY(event.nativeEvent.layout.y)}>
+          <Text style={styles.sectionTitle}>Register now</Text>
+          <Text style={styles.sectionText}>Complete the form to save your seat and receive event updates.</Text>
+
+          <View style={styles.formRow}>
+            <View style={[styles.formColumn, { height: carouselHeight }] }>
+              <ScrollView contentContainerStyle={styles.formScrollContent} showsVerticalScrollIndicator={false}>
+                <RegistrationForm compact={width > 760} />
+              </ScrollView>
+            </View>
+
+            <View style={[styles.carouselColumn, { height: carouselHeight }] }>
+              <ImageCarousel height={carouselHeight} />
+            </View>
+          </View>
+        </View>
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Why This Conclave?</Text>
           <Text style={styles.sectionText}>
@@ -117,30 +134,30 @@ const EventLandingScreen = () => {
           </Text>
           <View style={styles.featureGrid}>
             <View style={styles.featureCard}>
-              <Text style={styles.cardTitle}>Title 1</Text>
-              <Text style={styles.cardText}>One liner here...</Text>
-            </View>
-            <View style={styles.featureCard}>
-              <Text style={styles.cardTitle}>Title 2</Text>
+              <Text style={styles.cardTitle}>About Sri Sathya Sai Baba</Text>
               <Text style={styles.cardText}>One liner here...</Text>
             </View>
           </View>
         </View>
 
         <View style={[styles.section, styles.sectionAlt]}>
-          <Text style={styles.sectionTitle}>Messages</Text>
+          <Text style={styles.sectionTitle}>His Expressions of Love</Text>
           <View style={styles.messageCard}>
-            <Text style={styles.messageTitle}>“Message 1.”</Text>
+            <Text style={styles.messageTitle}>“Health”</Text>
             <Text style={styles.messageBody}>Message 1 here.</Text>
           </View>
           <View style={styles.messageCard}>
-            <Text style={styles.messageTitle}>“Message 2.”</Text>
+            <Text style={styles.messageTitle}>“Water”</Text>
             <Text style={styles.messageBody}>Message 2 here.</Text>
+          </View>
+          <View style={styles.messageCard}>
+            <Text style={styles.messageTitle}>"Education"</Text>
+            <Text style={styles.messageBody}>Message 3 here.</Text>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Featured projects - Over 40,000 Beneficiaries</Text>
+          <Text style={styles.sectionTitle}>Our Offerings to Him</Text>
           <View style={styles.projectGrid}>
             {projects.map((project) => (
               <View key={project.title} style={styles.projectCard}>
@@ -152,22 +169,7 @@ const EventLandingScreen = () => {
           </View>
         </View>
 
-        <View nativeID="registration" style={[styles.section, styles.sectionAlt]} onLayout={(event: LayoutChangeEvent) => setRegistrationY(event.nativeEvent.layout.y)}>
-          <Text style={styles.sectionTitle}>Register now</Text>
-          <Text style={styles.sectionText}>Complete the form to save your seat and receive event updates.</Text>
 
-          <View style={styles.formRow}>
-            <View style={[styles.carouselColumn, { height: carouselHeight }] }>
-              <ImageCarousel height={carouselHeight} />
-            </View>
-
-            <View style={[styles.formColumn, { height: carouselHeight }] }>
-              <ScrollView contentContainerStyle={styles.formScrollContent} showsVerticalScrollIndicator={false}>
-                <RegistrationForm compact={width > 760} />
-              </ScrollView>
-            </View>
-          </View>
-        </View>
 
         <View style={styles.footer}> 
           <Text style={styles.footerText}>Sethu.ai Empowering youth through skill development, value-based education, and selfless service inspired by the teachings of Bhagawan Sri Sathya Sai Baba.</Text>
