@@ -117,12 +117,12 @@ const EventLandingScreen = () => {
           </Text>
           <View style={styles.featureGrid}>
             <View style={styles.featureCard}>
-              <Text style={styles.cardTitle}>His Message</Text>
-              <Text style={styles.cardText}>One liner message here...</Text>
+              <Text style={styles.cardTitle}>Title 1</Text>
+              <Text style={styles.cardText}>One liner here...</Text>
             </View>
             <View style={styles.featureCard}>
-              <Text style={styles.cardTitle}>Message 2</Text>
-              <Text style={styles.cardText}>Second message here...</Text>
+              <Text style={styles.cardTitle}>Title 2</Text>
+              <Text style={styles.cardText}>One liner here...</Text>
             </View>
           </View>
         </View>
@@ -130,12 +130,12 @@ const EventLandingScreen = () => {
         <View style={[styles.section, styles.sectionAlt]}>
           <Text style={styles.sectionTitle}>Messages</Text>
           <View style={styles.messageCard}>
-            <Text style={styles.messageTitle}>“People-first AI is the only way forward for social impact.”</Text>
-            <Text style={styles.messageBody}>Sethu.ai is building tools that respect human judgment while applying powerful automation to everyday challenges.</Text>
+            <Text style={styles.messageTitle}>“Message 1.”</Text>
+            <Text style={styles.messageBody}>Message 1 here.</Text>
           </View>
           <View style={styles.messageCard}>
-            <Text style={styles.messageTitle}>“We design systems that can be trusted, audited, and scaled.”</Text>
-            <Text style={styles.messageBody}>Our approach bridges technical depth with clear community value.</Text>
+            <Text style={styles.messageTitle}>“Message 2.”</Text>
+            <Text style={styles.messageBody}>Message 2 here.</Text>
           </View>
         </View>
 
@@ -154,7 +154,7 @@ const EventLandingScreen = () => {
 
         <View nativeID="registration" style={[styles.section, styles.sectionAlt]} onLayout={(event: LayoutChangeEvent) => setRegistrationY(event.nativeEvent.layout.y)}>
           <Text style={styles.sectionTitle}>Register now</Text>
-          <Text style={styles.sectionText}>Complete the form to save your seat and receive event updates through Google Sheets integration.</Text>
+          <Text style={styles.sectionText}>Complete the form to save your seat and receive event updates.</Text>
 
           <View style={styles.formRow}>
             <View style={[styles.carouselColumn, { height: carouselHeight }] }>
@@ -170,7 +170,7 @@ const EventLandingScreen = () => {
         </View>
 
         <View style={styles.footer}> 
-          <Text style={styles.footerText}>Sethu.ai presents a focused event for NGOs, technologists, and change agents.</Text>
+          <Text style={styles.footerText}>Sethu.ai Empowering youth through skill development, value-based education, and selfless service inspired by the teachings of Bhagawan Sri Sathya Sai Baba.</Text>
         </View>
       </ScrollView>
       <FloatingButton onPress={scrollToRegistration} visible={showFab} />
