@@ -128,7 +128,7 @@ const EventLandingScreen = () => {
           <View style={styles.heroCopy}>
             <Text style={styles.heroLabel}>Sai Infinite Conclave</Text>
             <Text style={styles.heroTitle}>100 YEARS . ONE MISSION . INFINITE IMPACT.</Text>
-            <Text style={styles.heroSubtitle}>June 14, 2026 • 3PM–7:30PM • Auditorium, Jawaharlal Nehru Architecture and Fine Arts University, Masab Tank, Hyderabad.</Text>
+            <Text style={styles.heroSubtitle}>{'June 14, 2026 • 3PM–7:30PM\n\nAuditorium, Jawaharlal Nehru Architecture and Fine Arts University,\nMasab Tank, Hyderabad.'}</Text>
             <Text style={styles.heroDescription}>Special Address by Padmashri Dr Garikapati V B Narsimha Rao</Text>
             <View style={styles.heroCtas}>
               <Text onPress={scrollToRegistration} style={styles.ctaButton}>Register now</Text>
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   },
   heroCopy: {
     maxWidth: width - 40,
-    paddingTop: width > 760 ? 120 : 180,
+    paddingTop: width > 760 ? 72 : 100,
   },
   heroLabel: {
     color: colors.white,

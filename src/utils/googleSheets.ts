@@ -1,9 +1,10 @@
 export type GoogleSheetRegistrationPayload = {
   name: string;
+  age: string;
   email?: string;
   phone?: string;
-  city: string;
-  occupation: string;
+  city?: string;
+  occupation?: string;
   timestamp: string;
 };
 

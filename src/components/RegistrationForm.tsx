@@ -4,7 +4,7 @@ import { colors, spacing, typography } from '../styles/theme';
 import { googleSheetsConfig } from '../config/googleSheets';
 import { GoogleSheetRegistrationPayload, submitRegistrationToGoogleSheet } from '../utils/googleSheets';
 
-const occupations = ['Student', 'Working Professional', 'Unemployed'];
+const occupations = ['Student', 'Working Professional', 'Ready for Employment', 'Other'];
 
 interface Props {
   compact?: boolean;
@@ -12,6 +12,7 @@ interface Props {
 
 const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
   const [name, setName] = useState('');
+  const [age, setAge] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
@@ -30,13 +31,18 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
       return;
     }
 
-    if (!name.trim() || (!email.trim() && !phone.trim())) {
-      Alert.alert('Missing information', 'Please provide your name and either a phone number or email to register.');
+    if (!name.trim()) {
+      Alert.alert('Missing information', 'Please provide your full name.');
       return;
     }
 
-    if (!occupation) {
-      Alert.alert('Select occupation', 'Please choose whether you are a student, working professional, or unemployed.');
+    if (!age.trim()) {
+      Alert.alert('Missing information', 'Please provide your age.');
+      return;
+    }
+
+    if (!email.trim() && !phone.trim()) {
+      Alert.alert('Missing information', 'Please provide either a phone number or email to register.');
       return;
     }
 
@@ -47,10 +53,11 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
 
     const payload: GoogleSheetRegistrationPayload = {
       name: name.trim(),
+      age: age.trim(),
       email: email.trim() || undefined,
       phone: phone.trim() || undefined,
-      city: city.trim(),
-      occupation,
+      city: city.trim() || undefined,
+      occupation: occupation || undefined,
       timestamp: new Date().toISOString(),
     };
 
@@ -58,6 +65,7 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
       setIsSubmitting(true);
       await submitRegistrationToGoogleSheet(googleSheetsConfig.sheetEndpointUrl, payload);
       setName('');
+      setAge('');
       setEmail('');
       setPhone('');
       setCity('');
@@ -110,14 +118,22 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
           clearConfirmation();
           setName(text);
         }}
-        placeholder="Full name"
+        placeholder="Full name *"
         placeholderTextColor={colors.textSecondary}
+        style={[styles.input, compact && styles.inputCompact]}
+      />
+      <TextInput
+        value={age}
+        onChangeText={setAge}
+        placeholder="Age *"
+        placeholderTextColor={colors.textSecondary}
+        keyboardType="numeric"
         style={[styles.input, compact && styles.inputCompact]}
       />
       <TextInput
         value={phone}
         onChangeText={setPhone}
-        placeholder="Phone number"
+        placeholder="Phone number *"
         placeholderTextColor={colors.textSecondary}
         keyboardType="phone-pad"
         style={[styles.input, compact && styles.inputCompact]}
@@ -125,7 +141,7 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
       <TextInput
         value={email}
         onChangeText={setEmail}
-        placeholder="Email address"
+        placeholder="Email address *"
         placeholderTextColor={colors.textSecondary}
         keyboardType="email-address"
         autoCapitalize="none"
@@ -158,7 +174,7 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
         <View style={[styles.checkbox, compact && styles.checkboxCompact, agreed && styles.checkboxChecked]}>
           {agreed ? <View style={[styles.checkboxDot, compact && styles.checkboxDotCompact]} /> : null}
         </View>
-        <Text style={[styles.checkboxLabel, compact && styles.checkboxLabelCompact]}>I agree to receive event updates via email.</Text>
+        <Text style={[styles.checkboxLabel, compact && styles.checkboxLabelCompact]}>I agree to receive event updates via Email and Whatsapp.</Text>
       </Pressable>
 
       <Pressable
