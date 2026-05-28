@@ -101,7 +101,7 @@ const EventLandingScreen = () => {
           <View style={styles.heroGlow} />
           <View style={styles.heroCopy}>
             <Text style={styles.heroLabel}>Sai Infinite Conclave</Text>
-            <Text style={styles.heroTitle}>100 YEARS . ONE MISSION . INFINITE IMPACT</Text>
+            <Text style={styles.heroTitle}>100 YEARS . ONE MISSION . INFINITE IMPACT.</Text>
             <Text style={styles.heroSubtitle}>June 14, 2026 • 3PM–7:30PM • Auditorium, JNTU, Masab Tank, Hyderabad</Text>
             <Text style={styles.heroDescription}>Special Address by Padmashri Dr Garikapati V B Narsimha Rao</Text>
             <View style={styles.heroCtas}>
@@ -135,7 +135,7 @@ const EventLandingScreen = () => {
           <View style={styles.featureGrid}>
             <View style={styles.featureCard}>
               <Text style={styles.cardTitle}>About Sri Sathya Sai Baba</Text>
-              <Text style={styles.cardText}>One liner here...</Text>
+              <Text style={styles.cardText}>Sri Sathya Sai Baba is revered by millions of devotees as a divine embodiment of love and compassion, whose life and teachings guide humanity toward unity and service. "Love All, Serve All"</Text>
             </View>
           </View>
         </View>
@@ -144,15 +144,15 @@ const EventLandingScreen = () => {
           <Text style={styles.sectionTitle}>His Expressions of Love</Text>
           <View style={styles.messageCard}>
             <Text style={styles.messageTitle}>“Health”</Text>
-            <Text style={styles.messageBody}>Message 1 here.</Text>
+            <Text style={styles.messageBody}>Sri Sathya Sai Baba established super specialty hospitals that provided advanced medical care completely free of cost to millions.</Text>
           </View>
           <View style={styles.messageCard}>
             <Text style={styles.messageTitle}>“Water”</Text>
-            <Text style={styles.messageBody}>Message 2 here.</Text>
+            <Text style={styles.messageBody}>Sri Sathya Sai Baba launched massive drinking water projects that brought clean and safe water to drought-prone villages across India.</Text>
           </View>
           <View style={styles.messageCard}>
             <Text style={styles.messageTitle}>"Education"</Text>
-            <Text style={styles.messageBody}>Message 3 here.</Text>
+            <Text style={styles.messageBody}>Sri Sathya Sai Baba founded a value-based education system with schools and universities offering free education focused on character, excellence, and service to society.</Text>
           </View>
         </View>
 
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     width: '100%',
     minHeight: 520,
     backgroundColor: colors.primary,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     padding: spacing.xl,
   },
   heroImage: {
@@ -213,23 +213,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     zIndex: 1,
+    marginBottom: spacing.sm,
   },
   heroCopy: {
     maxWidth: width - 40,
+    paddingTop: width > 760 ? 120 : 180,
   },
   heroLabel: {
     color: colors.white,
     fontSize: typography.sectionTitle,
-    fontWeight: '600',
+    fontWeight: '500',
     letterSpacing: 1,
     textTransform: 'uppercase',
     marginBottom: spacing.sm,
   },
   heroTitle: {
     color: colors.white,
-    fontSize: typography.hero,
+    fontSize: width > 760 ? typography.hero : 42,
     fontWeight: '800',
-    lineHeight: 72,
+    lineHeight: width > 760 ? 72 : 48,
     marginBottom: spacing.md,
   },
   heroSubtitle: {
@@ -245,8 +247,8 @@ const styles = StyleSheet.create({
     maxWidth: 640,
   },
   logoBadge: {
-    minWidth: 100,
-    height: 100,
+    minWidth: width > 760 ? 100 : 72,
+    height: width > 760 ? 100 : 72,
     borderRadius: 20,
     backgroundColor: 'rgba(255,255,255,0.16)',
     borderColor: 'rgba(255,255,255,0.24)',
@@ -256,8 +258,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
   },
   logoImage: {
-    width: 96,
-    height: 96,
+    width: width > 760 ? 96 : 60,
+    height: width > 760 ? 96 : 60,
   },
   heroCtas: {
     flexDirection: 'row',
