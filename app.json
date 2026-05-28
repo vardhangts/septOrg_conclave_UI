@@ -7,6 +7,11 @@
     "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
     "jsEngine": "hermes",
-    "entryPoint": "node_modules/expo/AppEntry.js"
+    "entryPoint": "node_modules/expo/AppEntry.js",
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "baseUrl": "/conclave"
+    }
   }
 }

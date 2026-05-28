@@ -47,37 +47,37 @@ const projects = [
     title: 'Sri Sathya Sai Skill Development',
     image: null, // replace with: require('../assets/image8.jpeg')
     description: 'Bridging the gap between classroom and career, this initiative runs a dedicated bridge programme to make students job-ready. Young people who finish school without employable skills are equipped with practical training, confidence, and a pathway to livelihood — turning potential into purpose.',
-    metric: '500+ students trained',
+    metric: '320+ beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Premamrutha Dhara',
     image: null, // replace with: require('../assets/image9.jpeg')
     description: 'Safe drinking water remains a distant dream for many tribal communities. Premamrutha Dhara brings clean, piped drinking water directly to these underserved villages — ensuring that no family has to walk miles or drink unsafe water. It is love, flowing literally.',
-    metric: '10+ villages transformed',
+    metric: '50 Villages 10000 + Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Summer Water Camps',
     image: null, // replace with: require('../assets/image10.jpeg')
     description: 'Every summer, thousands of commuters brave Hyderabad\'s scorching heat with no access to drinking water. Volunteers set up water distribution camps at busy junctions and public spaces, quenching the thirst of thousands — a small act of seva with an enormous human touch.',
-    metric: 'metrics here...',
+    metric: '2 million (Cumulative of 4 Years)',
   },
   {
     title: 'Sri Sathya Sai Bala Suraksha',
     image: null, // replace with: require('../assets/image11.jpeg')
     description: 'Dental health is often the most neglected aspect of a child\'s wellbeing. Through regular dental camps in government schools, Bala Suraksha brings professional dental care — screenings, treatment, and awareness — directly to children who would otherwise never have access to it.',
-    metric: 'Metrics here...',
+    metric: '3000 + Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Educare',
     image: null, // replace with: require('../assets/image12.jpeg')
     description: 'More than just donating books, Educare adopts government schools wholesale — providing infrastructure, learning materials, uniforms, and ongoing support to ensure every child has a dignified, well-resourced learning environment. Education, as Swami taught, is a right, not a privilege.',
-    metric: 'Metrics here...',
+    metric: '200 + Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Higher Education Support',
     image: null, // replace with: require('../assets/image13.jpeg')
     description: 'Talent should never surrender to poverty. This initiative supports meritorious students from low-income families in pursuing college education — covering fees, materials, and mentorship — so that financial hardship is never the reason a young person\'s dream goes unfulfilled.',
-    metric: 'Metrics here...',
+    metric: '50 Beneficiaries',
   },
 ];
 
