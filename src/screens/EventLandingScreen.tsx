@@ -10,6 +10,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   Platform,
+  useWindowDimensions,
 } from 'react-native';
 import { colors, spacing, typography } from '../styles/theme';
 import FloatingButton from '../components/FloatingButton';
@@ -23,35 +24,59 @@ const logoSources = {
   right: require('../assets/logo-right.png'),
 };
 
+const messages = [
+  {
+    title: 'Healthcare for All',
+    image: null, // replace with: require('../assets/image5.jpeg')
+    body: 'Swami\'s compassion found its most visible expression in healthcare. He established the Sri Sathya Sai Institute of Higher Medical Sciences — super-specialty hospitals in Puttaparthi and Whitefield (Bengaluru) — where complex surgeries including open-heart procedures are performed completely free of cost. With no bills, no discrimination, and no exceptions, these hospitals stand as a living testament to His belief that " Health is wealth, and it must reach every soul ." Thousands of lives have been saved and transformed, many of whom had no other hope.',
+  },
+  {
+    title: 'Water — The Gift of Life',
+    image: null, // replace with: require('../assets/image6.jpeg')
+    body: 'Recognising that clean drinking water was beyond the reach of millions, Swami undertook one of independent India\'s largest humanitarian water supply projects. The Sri Sathya Sai Drinking Water Project brought safe, piped drinking water to over 1.2 million people across 750+ villages in drought-prone Anantapur district, Andhra Pradesh — an area that had suffered for decades. A second major project extended this gift to the cities of Chennai and Medak. No government funding, no fanfare — just pure, unconditional love in action.',
+  },
+  {
+    title: 'Education Rooted in Values',
+    image: null, // replace with: require('../assets/image7.jpeg')
+    body: 'Swami believed that "Education is not for a living — it is for life. " He built a network of free schools, colleges, and the Sri Sathya Sai Institute of Higher Learning (a deemed university) that offers world-class education at no cost to students. Beyond academics, His institutions focus on character-building, discipline, and service — nurturing not just bright minds, but good human beings. Thousands of alumni across the world carry forward His vision of an education that transforms from within.',
+  },
+];
+
 const projects = [
   {
     title: 'Sri Sathya Sai Skill Development',
-    description: 'Skill Development and Vocational Training for the youth, guided by industry leaders and adaptive learning platforms.',
+    image: null, // replace with: require('../assets/image8.jpeg')
+    description: 'Bridging the gap between classroom and career, this initiative runs a dedicated bridge programme to make students job-ready. Young people who finish school without employable skills are equipped with practical training, confidence, and a pathway to livelihood — turning potential into purpose.',
     metric: '500+ students trained',
   },
   {
-    title: 'Sri Sathya Sai Summer Water Camps',
-    description: 'Community-driven water conservation projects with real-time monitoring and impact analytics.',
+    title: 'Sri Sathya Sai Premamrutha Dhara',
+    image: null, // replace with: require('../assets/image9.jpeg')
+    description: 'Safe drinking water remains a distant dream for many tribal communities. Premamrutha Dhara brings clean, piped drinking water directly to these underserved villages — ensuring that no family has to walk miles or drink unsafe water. It is love, flowing literally.',
     metric: '10+ villages transformed',
   },
   {
-    title: 'Sri Sathya Sai Bala Suraksha',
-    description: 'Details here...',
+    title: 'Sri Sathya Sai Summer Water Camps',
+    image: null, // replace with: require('../assets/image10.jpeg')
+    description: 'Every summer, thousands of commuters brave Hyderabad\'s scorching heat with no access to drinking water. Volunteers set up water distribution camps at busy junctions and public spaces, quenching the thirst of thousands — a small act of seva with an enormous human touch.',
     metric: 'metrics here...',
   },
   {
+    title: 'Sri Sathya Sai Bala Suraksha',
+    image: null, // replace with: require('../assets/image11.jpeg')
+    description: 'Dental health is often the most neglected aspect of a child\'s wellbeing. Through regular dental camps in government schools, Bala Suraksha brings professional dental care — screenings, treatment, and awareness — directly to children who would otherwise never have access to it.',
+    metric: 'Metrics here...',
+  },
+  {
     title: 'Sri Sathya Sai Educare',
-    description: 'Details here...',
+    image: null, // replace with: require('../assets/image12.jpeg')
+    description: 'More than just donating books, Educare adopts government schools wholesale — providing infrastructure, learning materials, uniforms, and ongoing support to ensure every child has a dignified, well-resourced learning environment. Education, as Swami taught, is a right, not a privilege.',
     metric: 'Metrics here...',
   },
   {
-    title: 'Sri Sathya Sai Higher Education',
-    description: 'Details here...',
-    metric: 'Metrics here...',
-  },
-  {
-    title: 'Sri Sathya Sai Premrutha Dhara',
-    description: 'Details here...',
+    title: 'Sri Sathya Sai Higher Education Support',
+    image: null, // replace with: require('../assets/image13.jpeg')
+    description: 'Talent should never surrender to poverty. This initiative supports meritorious students from low-income families in pursuing college education — covering fees, materials, and mentorship — so that financial hardship is never the reason a young person\'s dream goes unfulfilled.',
     metric: 'Metrics here...',
   },
 ];
@@ -60,7 +85,8 @@ const EventLandingScreen = () => {
   const scrollRef = useRef<ScrollView | null>(null);
   const [registrationY, setRegistrationY] = useState(0);
   const [showFab, setShowFab] = useState(false);
-  const windowHeight = Dimensions.get('window').height;
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const isMobile = windowWidth <= 760;
   const carouselHeight = Math.min(windowHeight * 0.9, 812);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -102,7 +128,7 @@ const EventLandingScreen = () => {
           <View style={styles.heroCopy}>
             <Text style={styles.heroLabel}>Sai Infinite Conclave</Text>
             <Text style={styles.heroTitle}>100 YEARS . ONE MISSION . INFINITE IMPACT.</Text>
-            <Text style={styles.heroSubtitle}>June 14, 2026 • 3PM–7:30PM • Auditorium, JNTU, Masab Tank, Hyderabad</Text>
+            <Text style={styles.heroSubtitle}>June 14, 2026 • 3PM–7:30PM • Auditorium, Jawaharlal Nehru Architecture and Fine Arts University, Masab Tank, Hyderabad.</Text>
             <Text style={styles.heroDescription}>Special Address by Padmashri Dr Garikapati V B Narsimha Rao</Text>
             <View style={styles.heroCtas}>
               <Text onPress={scrollToRegistration} style={styles.ctaButton}>Register now</Text>
@@ -133,27 +159,28 @@ const EventLandingScreen = () => {
             Marking 100 years of Sri Sathya Sai Baba's mission of love, service, and human transformation — this conclave unites society at large which is a living testimony to decades of impact across Telangana, India and the World. Our Loving Tribute to Him.
           </Text>
           <View style={styles.featureGrid}>
-            <View style={styles.featureCard}>
-              <Text style={styles.cardTitle}>About Sri Sathya Sai Baba</Text>
-              <Text style={styles.cardText}>Sri Sathya Sai Baba is revered by millions of devotees as a divine embodiment of love and compassion, whose life and teachings guide humanity toward unity and service. "Love All, Serve All"</Text>
+            <View style={[styles.featureCard, isMobile && styles.featureCardFull]}>
+              <Text style={styles.cardTitle}>Sri Sathya Sai Baba — The Embodiment of Love</Text>
+              <Text style={styles.cardText}>Sri Sathya Sai Baba (1926– Forever) was one of the most beloved spiritual masters of the modern era. Born in the small village of Puttaparthi, Andhra Pradesh, He dedicated His entire life to the upliftment of humanity — inspiring millions across the globe with His timeless message: "Love All, Serve All."
+                His teachings were simple yet profound — Truth (Sathya), Right Conduct (Dharma), Peace (Shanti), Love (Prema), and Non-violence (Ahimsa). He believed that every human being carries the divine within, and that selfless service is the highest form of worship.
+                Swami's life was His message. He established free super-specialty hospitals, schools and universities offering value-based education, and drinking water projects serving millions — all as expressions of His boundless compassion.</Text>
             </View>
           </View>
         </View>
 
         <View style={[styles.section, styles.sectionAlt]}>
           <Text style={styles.sectionTitle}>His Expressions of Love</Text>
-          <View style={styles.messageCard}>
-            <Text style={styles.messageTitle}>“Health”</Text>
-            <Text style={styles.messageBody}>Sri Sathya Sai Baba established super specialty hospitals that provided advanced medical care completely free of cost to millions.</Text>
-          </View>
-          <View style={styles.messageCard}>
-            <Text style={styles.messageTitle}>“Water”</Text>
-            <Text style={styles.messageBody}>Sri Sathya Sai Baba launched massive drinking water projects that brought clean and safe water to drought-prone villages across India.</Text>
-          </View>
-          <View style={styles.messageCard}>
-            <Text style={styles.messageTitle}>"Education"</Text>
-            <Text style={styles.messageBody}>Sri Sathya Sai Baba founded a value-based education system with schools and universities offering free education focused on character, excellence, and service to society.</Text>
-          </View>
+          {messages.map((message) => (
+            <View key={message.title} style={styles.messageCard}>
+              <Text style={styles.messageTitle}>{message.title}</Text>
+              {message.image ? (
+                <Image source={message.image} style={styles.messageImage} resizeMode="cover" />
+              ) : (
+                <View style={styles.messageImagePlaceholder} />
+              )}
+              <Text style={styles.messageBody}>{message.body}</Text>
+            </View>
+          ))}
         </View>
 
         <View style={styles.section}>
@@ -162,6 +189,11 @@ const EventLandingScreen = () => {
             {projects.map((project) => (
               <View key={project.title} style={styles.projectCard}>
                 <Text style={styles.projectTitle}>{project.title}</Text>
+                {project.image ? (
+                  <Image source={project.image} style={styles.projectImage} resizeMode="cover" />
+                ) : (
+                  <View style={styles.projectImagePlaceholder} />
+                )}
                 <Text style={styles.projectText}>{project.description}</Text>
                 <Text style={styles.projectMetric}>{project.metric}</Text>
               </View>
@@ -298,9 +330,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    width: '100%',
   },
   featureCard: {
-    width: width > 760 ? '48%' : '100%',
+    width: '48%',
     backgroundColor: colors.surface,
     borderColor: colors.border,
     borderWidth: 1,
@@ -308,9 +341,12 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     marginBottom: spacing.lg,
   },
+  featureCardFull: {
+    width: '100%',
+  },
   cardTitle: {
     color: colors.textPrimary,
-    fontSize: typography.cardTitle,
+    fontSize: typography.sectionTitle,
     fontWeight: '700',
     marginBottom: spacing.sm,
   },
@@ -338,6 +374,19 @@ const styles = StyleSheet.create({
     fontSize: typography.body,
     lineHeight: 22,
   },
+  messageImage: {
+    width: '100%',
+    height: 180,
+    borderRadius: 12,
+    marginBottom: spacing.sm,
+  },
+  messageImagePlaceholder: {
+    width: '100%',
+    height: 180,
+    borderRadius: 12,
+    backgroundColor: colors.border,
+    marginBottom: spacing.sm,
+  },
   projectGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -356,6 +405,19 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: typography.cardTitle,
     fontWeight: '700',
+    marginBottom: spacing.sm,
+  },
+  projectImage: {
+    width: '100%',
+    height: 180,
+    borderRadius: 12,
+    marginBottom: spacing.sm,
+  },
+  projectImagePlaceholder: {
+    width: '100%',
+    height: 180,
+    borderRadius: 12,
+    backgroundColor: colors.border,
     marginBottom: spacing.sm,
   },
   projectText: {
