@@ -27,17 +27,30 @@ const logoSources = {
 const messages = [
   {
     title: 'Healthcare for All',
-    image: null, // replace with: require('../assets/image5.jpeg')
+    images: [
+      require('../assets/image5.jpeg'),
+      require('../assets/image51.jpeg'),
+      require('../assets/image52.jpeg'),
+    ],
     body: 'Swami\'s compassion found its most visible expression in healthcare. He established the Sri Sathya Sai Institute of Higher Medical Sciences — super-specialty hospitals in Puttaparthi and Whitefield (Bengaluru) — where complex surgeries including open-heart procedures are performed completely free of cost. With no bills, no discrimination, and no exceptions, these hospitals stand as a living testament to His belief that " Health is wealth, and it must reach every soul ." Thousands of lives have been saved and transformed, many of whom had no other hope.',
   },
   {
     title: 'Water — The Gift of Life',
-    image: null, // replace with: require('../assets/image6.jpeg')
+    images: [
+      require('../assets/image6.jpeg'),
+      require('../assets/image61.jpeg'),
+      require('../assets/image62.jpg'),
+    ],
     body: 'Recognising that clean drinking water was beyond the reach of millions, Swami undertook one of independent India\'s largest humanitarian water supply projects. The Sri Sathya Sai Drinking Water Project brought safe, piped drinking water to over 1.2 million people across 750+ villages in drought-prone Anantapur district, Andhra Pradesh — an area that had suffered for decades. A second major project extended this gift to the cities of Chennai and Medak. No government funding, no fanfare — just pure, unconditional love in action.',
   },
   {
     title: 'Education Rooted in Values',
-    image: null, // replace with: require('../assets/image7.jpeg')
+    images: [
+      require('../assets/image7.jpeg'),
+      require('../assets/image71.jpg'),
+      require('../assets/image72.jpg'),
+      require('../assets/image73.jpg'),
+    ],
     body: 'Swami believed that "Education is not for a living — it is for life. " He built a network of free schools, colleges, and the Sri Sathya Sai Institute of Higher Learning (a deemed university) that offers world-class education at no cost to students. Beyond academics, His institutions focus on character-building, discipline, and service — nurturing not just bright minds, but good human beings. Thousands of alumni across the world carry forward His vision of an education that transforms from within.',
   },
 ];
@@ -45,37 +58,61 @@ const messages = [
 const projects = [
   {
     title: 'Sri Sathya Sai Skill Development',
-    image: null, // replace with: require('../assets/image8.jpeg')
+    images: [
+      require('../assets/image8.jpg'),
+      require('../assets/image81.jpg'),
+      require('../assets/image82.jpg'),
+    ],
     description: 'Bridging the gap between classroom and career, this initiative runs a dedicated bridge programme to make students job-ready. Young people who finish school without employable skills are equipped with practical training, confidence, and a pathway to livelihood — turning potential into purpose.',
-    metric: '320+ beneficiaries',
+    metric: '320+ Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Premamrutha Dhara',
-    image: null, // replace with: require('../assets/image9.jpeg')
+    images: [
+      require('../assets/image9.jpg'),
+      require('../assets/image91.jpg'),
+      require('../assets/image93.jpg'),
+    ],
     description: 'Safe drinking water remains a distant dream for many tribal communities. Premamrutha Dhara brings clean, piped drinking water directly to these underserved villages — ensuring that no family has to walk miles or drink unsafe water. It is love, flowing literally.',
     metric: '50 Villages 10000 + Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Summer Water Camps',
-    image: null, // replace with: require('../assets/image10.jpeg')
+    images: [
+      require('../assets/image10.jpeg'),
+      require('../assets/image101.jpeg'),
+      require('../assets/image102.jpeg'),
+    ],
     description: 'Every summer, thousands of commuters brave Hyderabad\'s scorching heat with no access to drinking water. Volunteers set up water distribution camps at busy junctions and public spaces, quenching the thirst of thousands — a small act of seva with an enormous human touch.',
-    metric: '2 million (Cumulative of 4 Years)',
+    metric: '2 Million + Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Bala Suraksha',
-    image: null, // replace with: require('../assets/image11.jpeg')
+    images: [
+      require('../assets/image11.jpg'),
+      require('../assets/image111.jpg'),
+      require('../assets/image112.jpg'),
+    ],
     description: 'Dental health is often the most neglected aspect of a child\'s wellbeing. Through regular dental camps in government schools, Bala Suraksha brings professional dental care — screenings, treatment, and awareness — directly to children who would otherwise never have access to it.',
     metric: '3000 + Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Educare',
-    image: null, // replace with: require('../assets/image12.jpeg')
+    images: [
+      require('../assets/image12.jpg'),
+      require('../assets/image121.jpg'),
+      require('../assets/image122.jpg'),
+    ],
     description: 'More than just donating books, Educare adopts government schools wholesale — providing infrastructure, learning materials, uniforms, and ongoing support to ensure every child has a dignified, well-resourced learning environment. Education, as Swami taught, is a right, not a privilege.',
     metric: '200 + Beneficiaries',
   },
   {
     title: 'Sri Sathya Sai Higher Education Support',
-    image: null, // replace with: require('../assets/image13.jpeg')
+    images: [
+      require('../assets/image13.jpg'),
+      require('../assets/image131.jpg'),
+      require('../assets/image132.jpg'),
+    ],
     description: 'Talent should never surrender to poverty. This initiative supports meritorious students from low-income families in pursuing college education — covering fees, materials, and mentorship — so that financial hardship is never the reason a young person\'s dream goes unfulfilled.',
     metric: '50 Beneficiaries',
   },
@@ -173,8 +210,8 @@ const EventLandingScreen = () => {
           {messages.map((message) => (
             <View key={message.title} style={styles.messageCard}>
               <Text style={styles.messageTitle}>{message.title}</Text>
-              {message.image ? (
-                <Image source={message.image} style={styles.messageImage} resizeMode="cover" />
+              {message.images.length > 0 ? (
+                <ImageCarousel images={message.images} height={180} intervalMs={4000} />
               ) : (
                 <View style={styles.messageImagePlaceholder} />
               )}
@@ -189,8 +226,8 @@ const EventLandingScreen = () => {
             {projects.map((project) => (
               <View key={project.title} style={styles.projectCard}>
                 <Text style={styles.projectTitle}>{project.title}</Text>
-                {project.image ? (
-                  <Image source={project.image} style={styles.projectImage} resizeMode="cover" />
+                {project.images.length > 0 ? (
+                  <ImageCarousel images={project.images} height={180} intervalMs={4000} />
                 ) : (
                   <View style={styles.projectImagePlaceholder} />
                 )}
