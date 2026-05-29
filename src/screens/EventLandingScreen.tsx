@@ -178,10 +178,8 @@ const EventLandingScreen = () => {
           <Text style={styles.sectionText}>Complete the form to save your seat and receive event updates.</Text>
 
           <View style={styles.formRow}>
-            <View style={[styles.formColumn, { height: carouselHeight }] }>
-              <ScrollView contentContainerStyle={styles.formScrollContent} showsVerticalScrollIndicator={false}>
-                <RegistrationForm compact={width > 760} />
-              </ScrollView>
+            <View style={styles.formColumn}>
+              <RegistrationForm compact={width > 760} />
             </View>
 
             <View style={[styles.carouselColumn, { height: carouselHeight }] }>
@@ -209,13 +207,31 @@ const EventLandingScreen = () => {
           <Text style={styles.sectionTitle}>His Expressions of Love</Text>
           {messages.map((message) => (
             <View key={message.title} style={styles.messageCard}>
-              <Text style={styles.messageTitle}>{message.title}</Text>
-              {message.images.length > 0 ? (
-                <ImageCarousel images={message.images} height={180} intervalMs={4000} />
+              {isMobile ? (
+                <>
+                  <Text style={styles.messageTitle}>{message.title}</Text>
+                  {message.images.length > 0 ? (
+                    <ImageCarousel images={message.images} height={180} intervalMs={4000} />
+                  ) : (
+                    <View style={styles.messageImagePlaceholder} />
+                  )}
+                  <Text style={styles.messageBody}>{message.body}</Text>
+                </>
               ) : (
-                <View style={styles.messageImagePlaceholder} />
+                <View style={styles.messageRow}>
+                  <View style={styles.messageImageCol}>
+                    {message.images.length > 0 ? (
+                      <ImageCarousel images={message.images} height={220} intervalMs={4000} />
+                    ) : (
+                      <View style={[styles.messageImagePlaceholder, { height: 220 }]} />
+                    )}
+                  </View>
+                  <View style={styles.messageTextCol}>
+                    <Text style={styles.messageTitle}>{message.title}</Text>
+                    <Text style={styles.messageBody}>{message.body}</Text>
+                  </View>
+                </View>
               )}
-              <Text style={styles.messageBody}>{message.body}</Text>
             </View>
           ))}
         </View>
@@ -400,6 +416,19 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     marginBottom: spacing.md,
   },
+  messageRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.lg,
+  },
+  messageImageCol: {
+    width: '40%',
+    flexShrink: 0,
+  },
+  messageTextCol: {
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
   messageTitle: {
     color: colors.textPrimary,
     fontSize: typography.cardTitle,
@@ -480,10 +509,6 @@ const styles = StyleSheet.create({
     width: width > 760 ? '50%' : '100%',
     alignSelf: 'flex-start',
     paddingLeft: width > 760 ? spacing.lg : 0,
-  },
-  formScrollContent: {
-    padding: spacing.md,
-    paddingBottom: spacing.xl,
   },
   footer: {
     paddingHorizontal: spacing.xl,

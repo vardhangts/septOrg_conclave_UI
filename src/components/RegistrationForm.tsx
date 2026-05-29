@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Pressable, StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
 import { colors, spacing, typography } from '../styles/theme';
 import { googleSheetsConfig } from '../config/googleSheets';
 import { GoogleSheetRegistrationPayload, submitRegistrationToGoogleSheet } from '../utils/googleSheets';
@@ -20,34 +20,28 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
   const [agreed, setAgreed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
-  const endpointConfigured = Boolean(googleSheetsConfig.sheetEndpointUrl && !googleSheetsConfig.sheetEndpointUrl.includes('REPLACE_WITH_DEPLOYED_WEB_APP_URL'));
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async () => {
-    if (!endpointConfigured) {
-      Alert.alert(
-        'Google Sheets endpoint not configured',
-        'Set sheetEndpointUrl in src/config/googleSheets.ts to your deployed Google Apps Script web app URL before submitting.'
-      );
-      return;
-    }
+    setErrorMessage('');
 
     if (!name.trim()) {
-      Alert.alert('Missing information', 'Please provide your full name.');
+      setErrorMessage('Please provide your full name.');
       return;
     }
 
     if (!age.trim()) {
-      Alert.alert('Missing information', 'Please provide your age.');
+      setErrorMessage('Please provide your age.');
       return;
     }
 
     if (!email.trim() && !phone.trim()) {
-      Alert.alert('Missing information', 'Please provide either a phone number or email to register.');
+      setErrorMessage('Please provide either a phone number or email to register.');
       return;
     }
 
     if (!agreed) {
-      Alert.alert('Consent required', 'Please agree to share your contact details for event updates.');
+      setErrorMessage('Please agree to receive event updates before submitting.');
       return;
     }
 
@@ -71,9 +65,9 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
       setCity('');
       setOccupation('');
       setAgreed(false);
-      setConfirmationMessage('Registration confirmed. We have saved your details successfully.');
+      setConfirmationMessage('Registration confirmed! You will receive event updates and further communication shortly.');
     } catch (error: any) {
-      Alert.alert('Submission failed', error?.message || 'Unable to submit registration. Please try again later.');
+      setErrorMessage(error?.message || 'Unable to submit registration. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
@@ -97,20 +91,6 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
     <View style={[styles.card, compact && styles.cardCompact]}>
       <Text style={[styles.title, compact && styles.titleCompact]}>Secure your seat</Text>
       <Text style={[styles.subtitle, compact && styles.subtitleCompact]}>June 14 • 3PM–7:30PM • Live event</Text>
-
-      {confirmationMessage ? (
-        <View style={styles.confirmationBanner}>
-          <Text style={styles.confirmationText}>{confirmationMessage}</Text>
-        </View>
-      ) : null}
-
-      {!endpointConfigured ? (
-        <View style={styles.warningBanner}>
-          <Text style={styles.warningText}>
-            Google Sheets submission is disabled until you add your deployed Apps Script URL in src/config/googleSheets.ts.
-          </Text>
-        </View>
-      ) : null}
 
       <TextInput
         value={name}
@@ -178,10 +158,10 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
       </Pressable>
 
       <Pressable
-        style={[styles.submitButton, compact && styles.submitButtonCompact, !endpointConfigured && styles.submitButtonDisabled]}
+        style={[styles.submitButton, compact && styles.submitButtonCompact]}
         onPress={handleSubmit}
         accessibilityLabel="Submit registration"
-        disabled={isSubmitting || !endpointConfigured}
+        disabled={isSubmitting}
       >
         {isSubmitting ? (
           <ActivityIndicator color={colors.textPrimary} />
@@ -190,7 +170,18 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
         )}
       </Pressable>
 
-      <Text style={[styles.note, compact && styles.noteCompact]}>Registration saves responses to Google Sheets for follow-up.</Text>
+      {errorMessage ? (
+        <View style={[styles.errorBanner, styles.feedbackBanner]}>
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        </View>
+      ) : null}
+
+      {confirmationMessage ? (
+        <View style={[styles.confirmationBanner, styles.feedbackBanner]}>
+          <Text style={styles.confirmationText}>{confirmationMessage}</Text>
+        </View>
+      ) : null}
+
     </View>
   );
 };
@@ -331,6 +322,22 @@ const styles = StyleSheet.create({
   checkboxLabelCompact: {
     fontSize: 12,
   },
+  feedbackBanner: {
+    marginTop: spacing.md,
+  },
+  errorBanner: {
+    backgroundColor: 'rgba(220, 53, 69, 0.12)',
+    borderColor: '#dc3545',
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: spacing.sm,
+    marginBottom: spacing.sm,
+  },
+  errorText: {
+    color: '#dc3545',
+    fontSize: typography.small,
+    fontWeight: '600',
+  },
   confirmationBanner: {
     backgroundColor: 'rgba(0, 212, 255, 0.12)',
     borderColor: colors.accent,
@@ -383,9 +390,6 @@ const styles = StyleSheet.create({
   warningText: {
     color: colors.primary,
     fontSize: typography.small,
-  },
-  submitButtonDisabled: {
-    opacity: 0.6,
   },
 });
 

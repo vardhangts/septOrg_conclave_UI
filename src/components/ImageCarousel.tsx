@@ -9,7 +9,6 @@ type ImageSource = any;
 const defaultImages: ImageSource[] = [
   require('../assets/image1.jpeg'),
   require('../assets/image2.jpeg'),
-  require('../assets/image3.jpeg'),
   require('../assets/image4.jpeg'),
 ];
 
