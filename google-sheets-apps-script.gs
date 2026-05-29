@@ -6,7 +6,7 @@ function getSheet() {
   let sheet = spreadsheet.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = spreadsheet.insertSheet(SHEET_NAME);
-    sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'City', 'Occupation', 'Payload Timestamp']);
+    sheet.appendRow(['Timestamp', 'Name', 'Age', 'Email', 'Phone', 'City', 'Occupation', 'Payload Timestamp']);
   }
   return sheet;
 }
@@ -17,6 +17,9 @@ function doPost(e) {
     if (!payload.name || (!payload.email && !payload.phone)) {
       throw new Error('Missing required fields: name and either email or phone.');
     }
+    if (!payload.age) {
+      throw new Error('Missing required field: age.');
+    }
     if (!payload.occupation) {
       throw new Error('Missing required field: occupation.');
     }
@@ -25,6 +28,7 @@ function doPost(e) {
     const row = [
       new Date(),
       payload.name || '',
+      payload.age || '',
       payload.email || '',
       payload.phone || '',
       payload.city || '',
