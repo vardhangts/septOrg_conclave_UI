@@ -35,8 +35,29 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
       return;
     }
 
-    if (!email.trim() && !phone.trim()) {
-      setErrorMessage('Please provide either a phone number or email to register.');
+    const ageNum = Number(age.trim());
+    if (!Number.isInteger(ageNum) || ageNum < 1 || ageNum > 120) {
+      setErrorMessage('Please enter a valid age between 1 and 120.');
+      return;
+    }
+
+    if (!phone.trim()) {
+      setErrorMessage('Please provide your phone number.');
+      return;
+    }
+
+    if (!/^\+?[\d\s\-().]{7,15}$/.test(phone.trim())) {
+      setErrorMessage('Please enter a valid phone number.');
+      return;
+    }
+
+    if (!email.trim()) {
+      setErrorMessage('Please provide your email address.');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setErrorMessage('Please enter a valid email address.');
       return;
     }
 
