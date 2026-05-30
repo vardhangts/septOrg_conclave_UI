@@ -1,4 +1,4 @@
-const SHEET_ID = '1OGMsiRNUFuOMT8AX7Cr84otLsMQA4VKgD52oXVVZsqk';
+const SHEET_ID = '16q2fjNMGNTjhq7Z8t0IdyV0n0zMu-8w_LhU5l82o7AY';
 const SHEET_NAME = 'Registrations';
 
 function getSheet() {
@@ -19,9 +19,6 @@ function doPost(e) {
     }
     if (!payload.age) {
       throw new Error('Missing required field: age.');
-    }
-    if (!payload.occupation) {
-      throw new Error('Missing required field: occupation.');
     }
 
     const sheet = getSheet();

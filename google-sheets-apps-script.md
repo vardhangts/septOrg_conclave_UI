@@ -5,7 +5,7 @@ Use this guide to deploy a Google Apps Script web app that accepts form submissi
 ## 1. Open the Google Sheet
 
 1. Open your sheet:
-   https://docs.google.com/spreadsheets/d/1OGMsiRNUFuOMT8AX7Cr84otLsMQA4VKgD52oXVVZsqk/edit?usp=sharing
+   https://docs.google.com/spreadsheets/d/16q2fjNMGNTjhq7Z8t0IdyV0n0zMu-8w_LhU5l82o7AY/edit?usp=sharing
 2. In the menu, choose **Extensions > Apps Script**.
 
 ## 2. Paste the script
@@ -17,7 +17,7 @@ Create a new script and paste the contents of `google-sheets-apps-script.gs`.
 The script currently uses this sheet ID:
 
 ```js
-const SHEET_ID = '1OGMsiRNUFuOMT8AX7Cr84otLsMQA4VKgD52oXVVZsqk';
+const SHEET_ID = '16q2fjNMGNTjhq7Z8t0IdyV0n0zMu-8w_LhU5l82o7AY';
 ```
 
 If you change the sheet location later, update `SHEET_ID` to the new spreadsheet ID.
@@ -38,8 +38,8 @@ Example:
 
 ```ts
 export const googleSheetsConfig = {
-  sheetUrl: 'https://docs.google.com/spreadsheets/d/1OGMsiRNUFuOMT8AX7Cr84otLsMQA4VKgD52oXVVZsqk/edit?usp=sharing',
-  sheetEndpointUrl: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec',
+  sheetUrl: 'https://docs.google.com/spreadsheets/d/16q2fjNMGNTjhq7Z8t0IdyV0n0zMu-8w_LhU5l82o7AY/edit?usp=sharing',
+  sheetEndpointUrl: 'https://script.google.com/macros/s/AKfycbzC6b8SG5LaZ18axcHrr25plClrSkPxXT0v0oJ-wrqj1sUdV03JPCA1UEmOG7KPB1Q78A/exec',
 };
 ```
 
@@ -49,10 +49,12 @@ Send a POST request with JSON payload to your web app URL.
 
 Required fields:
 - `name`
-- `occupation`
-- either `email` or `phone`
+- `age`
+- `email`
+- `phone`
 
 Optional fields:
 - `city`
+- `occupation`
 
 Your React Native form already sends the correct payload.

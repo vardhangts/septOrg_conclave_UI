@@ -103,7 +103,7 @@ const RegistrationForm: React.FC<Props> = ({ compact = false }) => {
 
     const timeout = setTimeout(() => {
       setConfirmationMessage('');
-    }, 4000);
+    }, 15000);
 
     return () => clearTimeout(timeout);
   }, [confirmationMessage]);
@@ -309,16 +309,20 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     borderRadius: 6,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderWidth: 2,
+    borderColor: colors.primary,
     marginRight: spacing.sm,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'rgba(229,127,65,0.08)',
   },
   checkboxCompact: {
     width: 18,
     height: 18,
     marginRight: spacing.sm,
+    borderWidth: 2,
+    borderColor: colors.primary,
+    backgroundColor: 'rgba(229,127,65,0.08)',
   },
   checkboxChecked: {
     backgroundColor: colors.primary,
@@ -336,9 +340,10 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   checkboxLabel: {
-    color: colors.textSecondary,
+    color: colors.textPrimary,
     fontSize: typography.small,
     flex: 1,
+    fontWeight: '600',
   },
   checkboxLabelCompact: {
     fontSize: 12,
